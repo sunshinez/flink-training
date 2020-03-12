@@ -73,6 +73,7 @@ final class TransactionIterator implements Iterator<Transaction>, Serializable {
         Transaction transaction = data.get(index++);
         transaction.setTimestamp(timestamp);
         timestamp += SIX_MINUTES;
+        //timestamp = INITIAL_TIMESTAMP.getTime();
         return transaction;
     }
 

@@ -10,6 +10,7 @@ import org.apache.flink.walkthrough.common.source.TransactionSource;
 public class DataFrameAPITraining {
     public static void main(String[] args) throws Exception {
         StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
+        //env.setStreamTimeCharacteristic(TimeCharacteristic.EventTime);
         DataStream<Transaction> source = env.addSource(new TransactionSource()).name("TransactionSource");
         DataStream<Alert> alert = source.keyBy(Transaction::getAccountId).process(new FraudDetector()).name("FraudDetector");
         alert.addSink(new AlertSink()).name("alertSink");
